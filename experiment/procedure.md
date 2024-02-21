@@ -6,15 +6,23 @@
 Figure 1. Gear tooth vernier caliper with spur gear          
 </div> -->
 
+1. First click on the green power button to switch on the monochromatic light source. The mirror will be at the
+zero position first (0-110 mm). There will be missalignment between target graticule and setting graticule
+horizontal lines in the reflected image on the mirror. 
 
-1.	Prior to measuring ensure surface must be cleaned.
-2.	Mount the autocollimator in such a way that its axis should be parallel to the test surface.
-3.	Mark distances on the test surface parallel to the collimator axis based on the length of the test block.
-4.	Begin numbering the marked points starting from ‘0’.
-5.	Place the test block on the testing surface, aligning it with the ‘0-1’ marks, and ensure test surface is normal  to the collimator axis.
-6.	Adjust the collimator until the cross wire and its mirrored image converge when observed through eyepiece.
-7.	Move the test block to another position, ‘1-2’, on the test surface while maintaining its reflecting surface perpendicular to the direction of movement.
-8.	Any non-coincidence between the cross wire and the image confirms unevenness in the test surface. The scale in the collimator provides the direct measure of the angle of deviation 
-9.	Repeat the procedure along the entire length of the test surface and note down the readings.
-10.	 Calculate the deviation from straightness  at each point relative to the initial point and plot these values to detect any deviations or errors in straightness.
+<div align="center">
+<img class="img-fluid"  src="./images/conn.png" alt=""><br> 
+Figure 1. Measurement of alignment using Autocollimator simulation model          
+</div>
 
+2. The micrometer adjustment is provided for controlling the coincidence of setting graticule and the target image photo-electrically. Click on the ratchet of the micrometer untill the horizontal lines of setting and target graticule coincides.
+
+3. Click on 'Calculate' button to observe the measurements. Click on 'Table' at the bottom of the page and click on 'Show Table' button to tabulate the readings.
+
+4. Switch off the power button. Now move the mirror to next position (110-220 mm) in the left by clicking on the left side arrow key of 'Move Mirror' button once. Follow steps 1-3 to note the second observation.
+
+5. Follow step 4 again for positions 220-330, 330-440, 440-550, 550-660, 660-770 and 770-880 mm. At the end eight observations will be generated.
+
+6. Now click on "Cumulative Error (&micro;m) Vs. Position (mm)" or "Error from horizontal straight line (&micro;m) Vs. Position (mm)" under 'Plot' to observe the plots.
+
+7. Click on 'Clear' button.

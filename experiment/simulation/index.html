@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en"><!--html tag start-->
 <head>
-    <title>Measurement of Screw Threads Parameters using Two Wire or Three-Wire Methods</title>
+    <title>Measurement of alignment using Autocollimator / Roller Set </title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,7 @@
    
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script  src="./js/screwThread.js">   </script>
+  <script  src="./js/acm.js">   </script>
   
 
   
@@ -40,7 +40,7 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
 
-<link rel="stylesheet" href="./css/screwThread_updated.css">
+<link rel="stylesheet" href="./css/acm.css">
 
 	
 
@@ -59,7 +59,7 @@
   
 </head>
 <body><!--body tag start-->
-    <div class="container p-3 my-3 text-primary text-center "><!--First Container under body tag start-->
+    <div class="container my-3 text-primary text-center "><!--First Container under body tag start-->
        
         <hr>
         <div class="row"><!--2nd row under 1st container start-->
@@ -75,35 +75,33 @@
     
    
 	
-    <div class="container p-3 my-5 text-left border"><!--3rd Container under body tag start-->
+    <div class="container text-left "><!--3rd Container under body tag start-->
       <div class="row"><!--First row under 3rd container start-->
-        <div class="col-md-1"></div><!--First col under 3rd container start& end-->
-        <div class="col-md-10"><!--2nd col under 3rd container start-->
+        <!-- <div class="col-md-1"></div>--><!--First col under 3rd container start& end-->
+        <div class="col-md-12"><!--2nd col under 3rd container start-->
             <p class="text-center bg-success"> <a class="nav-link" data-bs-toggle="tab"  id="instcontrol" style="background-color:#128BD9"  ><span class=" h3 text-dark"> Instructions </span></a>
               <div id="inst" style="display:none">
 			  <ol>
                       
-					  <li> First click on 'Two-wire' under 'Experiment Parts'. Click on the one wire for two times to place the two wires on
-					  the measuring faces of micrometer spindle and anvil.</li><br/>
+					  <li> First click on the green power button to switch on the monochromatic light source. The mirror will be at the 
+					  zero position first (0-110 mm). There will be missalignment between target graticule and setting graticule
+					  horizontal lines in the reflected image on the mirror. </li><br/>					  
+					  
+					  <li>The micrometer adjustment is provided for controlling the coincidence of setting graticule and the target image photo-electrically.
+						Click on the ratchet of the micrometer untill the horizontal lines of setting and target graticule coincides.</li><br/>
 					 
-					 <li>Click on the screw thread specimen to place it in between the two wires on the measuring faces of micrometer spindle and anvil.
-					 Click on the left side arrow key on the 'Rotate Micrometer' button. Wait until the circular scale of the micrometer stops rotating. Again click on the same arrow key
-					 . Click it until the screw thread is properly fixed between the wires. One alert message will be shown when it is properly fixed. 
-					 </li></br>
-					 
-					 <li>Click on 'Calculate' button to find out the values of the distance between the outer surfaces of the two wires ( M (mm))
-					 and the effective diameter ( E (mm)). Click on the right side arrow key on the 'Rotate Micrometer' button two to three times
-					to move the micrometer spindle from fixed position.</li><br/>
+					 <li>Click on 'Calculate' button to observe the measurements. Click on 'Table' at the bottom of the page and click on 'Show Table' button to tabulate the readings.</li><br/>
 
-					 <li>Click on the screw thread specimen to place it back to its previous position. Click on 'Clear' button.</li><br/> 
+					 <li>Switch off the power button. Now move the mirror to next position (110-220 mm) in the left by clicking on the left side arrow key of
+					 'Move Mirror' button once. Follow steps 1-3 to note the second observation.</li><br/> 
 					 
-					 <li>Now click on 'Three-wire' under 'Experiment Parts'. Click on the one wire and two wire to place them on
-					  the measuring faces of micrometer spindle and anvil.</li><br/>
-						
-					<li>Follow steps 2-4 to measure the distance between the outer surfaces of the three wires ( M (mm)), the effective diameter ( E (mm)).
-					and the value of H ( height of the threads in mm ). </li><br/>
-
-					 
+					 <li>Follow step 4 again for positions 220-330, 330-440, 440-550, 550-660, 660-770 and 770-880 mm. At the end eight observations 
+					 will be generated.</li><br/>
+					  
+					 <li>Now click on "Cumulative Error (&micro;m) Vs. Position (mm)" or "Error from horizontal straight line (&micro;m) Vs. Position (mm)" under 'Plot' to observe the plots.</li><br/>
+					
+					<li>Click on 'Clear' button.</li><br/>
+					
 					<br/><br/>
 					</ol>
 					
@@ -111,43 +109,11 @@
             </p> 
           </div><!--2nd col under 3rd container end-->
 		  
-        <div class="col-md-1"></div><!--3rd col under 3rd container start& end-->
+        <!--<div class="col-md-1"></div><!--3rd col under 3rd container start& end-->
       </div><!--First row under 3rd container end-->
     </div><!--3rd Container under body tag end-->
 	
-    <div class="container p-3 my-5 text-center border" id="canvas" ><!--Fourth container under body tag start-->
-	
-	<div class="row my-5 gy-2">
-	
-	<div class="col-md-2">	
-	<input type="number" id="seudobox" value="1" min="1" max="2" style="visibility:hidden">
-	
-	</div>
-	
-	<div class="col-md-4">	
-	
-	<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Experiment Parts
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" onclick="seudovalue1();two_wire()">Two-wire Method</a></li>
-    <li><a class="dropdown-item" onclick="seudovalue2();three_wire()">Three-wire Method</a></li>
-  </ul>
-</div>
-
-</div>
-
-<div class="col-md-4">		
-<button type="button" id="g1"  class="btn btn-success " >
- <i class="fa fa-angle-double-left" id="rbtnP" onclick="rotategauge();cscalePosChng();screw_widthincr()" style="color:white;pointer-events:auto"></i>&nbsp;Rotate Micrometer&nbsp;<i class="fa fa-angle-double-right" id="rbtnM" onclick="rotategaugerev();cscalePosChngRev();screw_widthdecr()" style="color:white;pointer-events:auto"></i>
-</button>
-		
-	</div>
-	
-<div class="col-md-2"></div>	
-	
-	</div>
+    <div class="container p-3 my-5 text-center " id="canvas" ><!--Fourth container under body tag start-->
 	
 	<div class="row ">
 	<div class="col-md-1"></div>
@@ -155,83 +121,98 @@
 			<div class="card" style=" width:100%;background-color:pink" > 
 			
 			<div class="card-body">
-			<span class="card-title bg-light"> Measurement of the effective diameter E</span><br/>			
-			<span class="card-text" >The distance between the outer surfaces of the two wires ( M (mm)):&nbsp;<input  type="number" id="M" value="0" readonly=readonly style="width:30%;text-align:center"></span><br/><br/>
-			<span class="card-text">The effective diameter ( E (mm)):&nbsp;<input type="number" id="E" value="0" readonly=readonly  style="width:30%;text-align:center"></span><br/><br/>
-			<span class="card-text" id="HT" style="display:none">The effective diameter ( H (mm)):&nbsp;<input type="number" id="H" value="0" readonly=readonly  style="width:30%;text-align:center"></span><br/><br/>
-			<button  type="button"   id="calcbtn" class="btn btn-success " onclick="calculate()" disabled="true">Calculate</button>
-			<button  type="button" class="btn btn-danger " onclick="Refresh()" >Clear</button>
+			<span class="card-title bg-light"> Measurements </span><br/><br/>
+
+			<span class="card-text" >Position ( mm ):&nbsp;<input type="text" value="0" id ="position" style=" width:20%;text-align:center" readonly=readonly/><br/><br/></span>
+
+			<span class="card-text" >Forward ( Min. ):&nbsp;<input type="number" value="0" id ="Fm" style=" width:20%;text-align:center" readonly=readonly/><br/><br/></span>
+
+			<span class="card-text" >Forward ( Sec. ):&nbsp;<input type="number" value="0" id ="Fs" style=" width:20%;text-align:center" readonly=readonly/><br/><br/></span>
+
+			<span class="card-text" >Forward ( (total)Sec. ):&nbsp;<input type="number" value="0" id ="F" style=" width:20%;text-align:center" readonly=readonly/><br/><br/></span>
+
+			<div class="d-inline-flex p-2"> 
+			<div class="p-2"><button  type="button"   id="calcbtn" class="btn btn-success " onclick="calculate()" disabled="true">Calculate</button></div>
+			<div class="p-2"><button  type="button"   id="Tbtn" class="btn btn-info " onclick="CreateTable()" disabled="true">Show Table</button></div>
+			<div class="p-2"><div class="dropdown">
+				  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					Plot
+				  </button>
+				  <ul class="dropdown-menu">
+					<li><a class="dropdown-item" onclick="plot1()">Cumulative Error (&micro;m) Vs. Position (mm) </a></li>
+					<li><a class="dropdown-item" onclick="plot2()">Error from horizontal straight line (&micro;m) Vs. Position (mm)</a></li>
+				  </ul>
+				</div></div>
+			<div class="p-2"><button  type="button" class="btn btn-danger " onclick="Refresh()" >Clear</button></div>
+			</div>
+			
 			</div></div></div>
 			
 			<div class="col-md-1"></div>
+			</div>
+		</div>	
 			
+			<div class="row my-5">
+
+	
+			<div class="col-md-12">
+			
+			<div   class="img-container">
+			
+			<img  src="./images/base.png">
+			<img id="rular" src="./images/rular.png">
+			<!-- <img id="rfbase" src="./images/rfbase.png">
+			<img id="rfbase2" src="./images/rfbase2.png"> -->
+			<img id="mirror" src="./images/mirrorset.png">
+			<img id="sw" src="./images/poff.png" onclick="onoff()">
+			<img id="acm" src="./images/acmfixed.png">
+			<img id="camera" src="./images/camera.png">
+			<img id="minscale" src="./images/minscale.png">
+			<img id="minpointer" src="./images/minscale_pointer.png">
+			<img id="secscale" src="./images/secscale10.png">
+			<img id="secpointer" src="./images/secscale_pointer.png">
+			<img id="camtop" src="./images/secscale_ratchet.png" onclick="secscaleRotation();simulation()" style="pointer-events:none;">
+			<img id="lightcir" src="./images/lightimg1.png">
+			
+			
+							
+<button type="button" id="mbtn"  class="btn btn-success " style="pointer-events:auto;" onclick="alertMirror()">
+ <i class="fa fa-angle-double-left" id="rbtnP" onclick="moveLeft()" style="color:white;pointer-events:auto"></i>&nbsp;Move Mirror&nbsp;<i class="fa fa-angle-double-right" id="rbtnM" onclick="moveRight()" style="color:white;pointer-events:none"></i>
+</button>
 			</div>
 			
 			
-			<div class="row my-5">
-			<div class="col-md-12">
-			<div   class="img-container">
-			
-			<img  src="./images/fmfixed2.png">
-			
-			<img id="fmls" src="./images/fmls.png" onclick="">	
-			<img id="fmmv" src="./images/fmmove.png" onclick="">	
-			 <img id="cscale" src="./images/fm1.png" >
-			<img id="ratchet" src="./images/ratchet.png" > 
-			<img id="gatis" src="./images/mjvprt.png" >
-			
-			<img id="screwThread2" src="./images/screwthread.png" onclick="moveThread()" >
-			<img id="sideWire1" src="./images/sidewire.png" onclick = "">
-			<img id="sideWire2" src="./images/sidewire.png" onclick = "">
-			
-			</div>	
-			<input type="number" id="movechk" min="1" value="1" max="2" readonly=readonly style="visibility:hidden">
+			<input type="number" id="movechk" min="1" value="1" max="10" readonly=readonly style="visibility:hidden">
 			
 	</div>
 	
 	<!--<button class="btn btn-success" onclick="Dw_Tester()">Simulate</button>-->
 	</div>
 	
+ <div class="container p-3 my-5 text-center ">
 	 <div class="row"><!--- 2nd row under fourth container start--->		
 		
-			<div class="col-md-4 "><!--2nd col under 2nd row start -->
+			<div class="col-md-12 "><!--2nd col under 2nd row start -->
 			
-			<img id="screwThread" src="./images/screwthread.png" onclick="moveThread()" > 
-			<p id = "sTtext">Screw thread specimen</p>
-			</div>
-			
-			<div class="col-md-4 ">
-			<img id="twoWire" src="./images/twowire.png" onclick = "side2()">
-			<p id = "twowireT">Two Wire</p>
-			</div>
-			
-			<div class="col-md-4 ">
-			<img id="oneWire" src="./images/onewire.png" onclick = "side1()">
-			<p id = "onewireT">One Wire</p>
-			
-		<!-- <button type="button"  class="btn btn-info " onclick="CreateTable()" >Add to Table</button>
-		<!-- <button type="button"   class="btn btn-success " onclick="plot()" >Plot</button> --
-		<button type="button"   class="btn btn-danger " onclick="Refresh()" >Clear</button> -->
-		</div>
-		</div> 
-		
-	<!-- <div class="row"><!--- 2nd row under fourth container start---		
-		
-			<div class="col-md-12 "><!--2nd col under 2nd row start --	
+			<input id="achk" value="0" style="visibility:hidden;"><!--Cumulative Rise/Fall-->
+			<input id="cchk" value="0" style="visibility:hidden;"><!--Adjustment-->
 			
 			<br/>
 			<div><a class="nav-link" data-bs-toggle="tab"  id="myTables" style="background-color:#128BD9" ><span class=" h3 text-dark"> Table </span></a>
 			
-			<table id="obsTable1" style="display:none;width:100%">			
+			<table id="obsTable" style="display:none;width:100%">			
 				
 				  <tr>
 					<th>Sl No.</th>
-					<th>t<sub>1</sub>(in)</th> 
-					<th>t<sub>2</sub>(in)</th>
-					<th>t<sub>3</sub>(in)</th>
-					<th>Mean t(in)</th>
-					<th>Theoritical thickness T(in)</th>
-					<th>Variation(in)</th>
+					<th>Position (mm)</th> 
+					<th>Forward (Min.)</th>
+					<th>Forward (Sec.)</th>
+					<th>Forward (total(Sec.))</th>
+					<th>Diff. from first value (sec)</th>
+					<th>Rise/Fall over 110mm base length (&micro;m)</th>
+					<th>Cumulative Rise and fall (&micro;m)</th>
+					<th>Adjustment (&micro;m)</th>
+					<th>Error (&micro;m)</th>
 				  </tr>
 				  
 			</table>
@@ -239,23 +220,19 @@
 			</div>	
 				</div>				
 		
-	</div><!--- 2nd row under fourth container end---
+	</div><!--- 2nd row under fourth container end--->
 
 
-	 <div class="row justify-content-center"><!-----------------------graph T vs. w-----------------------------------------
+	 <div class="row justify-content-center"><!-----------------------graph T vs. w----------------------------------------->
 		
 	 
 			<div class="col-md-12">
 				
-				<div align="center" id="myPlot" style="width:100%;max-width:700px;padding-left:10%"></div>
+				<div align="center" id="myPlot" style="width:100%;max-width:700px;padding-left:10%"></div>				
 				
-				
-				
-			</div>
-			
-			
+			</div>			
 		
-	</div>	 -->
+	</div>
 
 	
 	
@@ -265,7 +242,7 @@
       <!--</div>
     </div>-->
 
-    <div class="container p-3 my-5 text-primary text-center border"><!--Last and fifth container under body tag start-->
+    <div class="container text-primary text-center "><!--Last and fifth container under body tag start-->
       <div class="row">
         <footer>
           <div class="row ce">
